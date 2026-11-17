@@ -27,7 +27,7 @@ img{display:block;max-width:100%}
 .page{width:100%;max-width:600px;margin:0 auto;background:var(--bg);overflow:hidden;position:relative;box-shadow:0 0 60px rgba(0,0,0,.4)}
 
 /* ---------- 主視覺（座標皆為相對 375×562 設計稿的百分比） ---------- */
-.hero{position:relative;aspect-ratio:375/562;background:#c98a5f}
+.hero{position:relative;aspect-ratio:375/562;background:var(--bg)}
 .hero .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(180deg,rgba(167,106,65,0),var(--bg));pointer-events:none}
 .abs{position:absolute;z-index:2}
@@ -37,25 +37,25 @@ img{display:block;max-width:100%}
 .una{left:12.8%;top:69.5%;width:74.7%}
 .venue{left:6.4%;top:90.6%;width:87.5%}
 
-/* ---------- 曲目（以 375 設計稿換算：左 12.8%、照片 33%、間距 10.7%） ---------- */
-.setlist{position:relative;z-index:1;display:grid;grid-template-columns:41.3% 1fr;column-gap:13.4%;padding:11.5% 7.2% 8% 12.8%;align-items:center}
+/* ---------- 曲目（照片 33%、間距 10.7%，整組在頁面水平置中） ---------- */
+.setlist{position:relative;z-index:1;display:grid;grid-template-columns:33.07% auto;column-gap:10.7%;justify-content:center;padding:40px 0;align-items:center}
 .setlist-photo img{width:100%;height:auto;border-radius:3px}
 .script{font-family:var(--script);font-weight:400;color:var(--gold);line-height:1}
-.sec-title .script{font-size:clamp(34px,10vw,60px)}
-.sec-title h2{font-weight:500;font-size:clamp(18px,5vw,26px);letter-spacing:.12em;margin-top:2px}
-.songs{list-style:none;margin-top:calc(8% + .58em);display:flex;flex-direction:column;gap:16px;font-size:clamp(14px,4vw,21px);letter-spacing:.14em}
-.songs li{display:flex;gap:.8em;align-items:baseline}
-.songs .no{color:var(--gold);letter-spacing:.04em;min-width:2.3em;font-size:.88em}
+.sec-title .script{font-size:32px}
+.sec-title h2{font-weight:500;font-size:20px;letter-spacing:.12em;margin-top:2px}
+.songs{list-style:none;margin-top:calc(8% + .58em);display:flex;flex-direction:column;gap:14px;font-size:16px;letter-spacing:.14em}
+.songs li{display:flex;gap:12px;align-items:baseline}
+.songs .no{color:var(--gold);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 
 /* ---------- 特別感謝 ---------- */
-.thanks{position:relative;text-align:center;padding:8% 8% 4%}
+.thanks{position:relative;text-align:center;padding:40px 4%}
 .lines2-wrap{position:absolute;left:0;top:0;width:100%;transform:translateY(-52%);pointer-events:none;z-index:0}
 .lines2-wrap img{width:100%;height:auto}
 .thanks .t-head,.thanks .credits{position:relative;z-index:1}
-.thanks .script{font-size:clamp(40px,11.5vw,68px)}
-.thanks h2{font-weight:600;font-size:clamp(18px,5vw,26px);letter-spacing:.12em;margin-bottom:7%}
-.credits{display:grid;grid-template-columns:1fr 1fr;column-gap:3%;row-gap:16px;font-size:clamp(14px,3.9vw,19px);letter-spacing:.06em;max-width:480px;margin:0 auto}
-.credits dt{text-align:right}
+.thanks .script{font-size:32px}
+.thanks h2{font-weight:600;font-size:20px;letter-spacing:.12em;margin-bottom:calc(7% + .2em)}
+.credits{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;row-gap:14px;font-size:16px;letter-spacing:.04em;margin:0 auto;max-width:520px}
+.credits dt{text-align:right;white-space:nowrap}
 .credits dd{text-align:left}
 .credits .all{grid-column:1/-1;text-align:center}
 /* 頁尾圖：脫離內距，永遠左右貼齊頁面 */
@@ -69,6 +69,8 @@ img{display:block;max-width:100%}
 .fade{opacity:0}
 .is-ready .fade{animation:fadein 2.2s ease forwards;animation-delay:var(--d,0s)}
 @keyframes fadein{to{opacity:1}}
+.hero .photo{opacity:0;transition:opacity 2s ease}
+.is-ready .hero .photo{opacity:1}
 /* 捲動淡入 */
 .reveal{opacity:0;transform:translateY(16px);filter:blur(4px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),filter 1.1s var(--ease);transition-delay:var(--d,0s)}
 .reveal.in{opacity:1;transform:none;filter:none}
@@ -78,9 +80,9 @@ img{display:block;max-width:100%}
 .rv-fade.in{opacity:1}
 
 @media (prefers-reduced-motion:reduce){
-  .wipe,.fade,.reveal,.rv-fade,.setlist-photo img{animation:none!important;transition:none!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}
+  .wipe,.fade,.reveal,.rv-fade,.hero .photo,.setlist-photo img{animation:none!important;transition:none!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}
 }
-.no-js .wipe,.no-js .fade,.no-js .reveal,.no-js .rv-fade,.no-js .setlist-photo img{opacity:1;transform:none;filter:none;clip-path:none}
+.no-js .wipe,.no-js .fade,.no-js .reveal,.no-js .rv-fade,.no-js .hero .photo,.no-js .setlist-photo img{opacity:1;transform:none;filter:none;clip-path:none}
 </style>
 </head>
 <body class="no-js">
@@ -122,13 +124,13 @@ img{display:block;max-width:100%}
       <h2 id="thanks-h">特別感謝</h2>
     </div>
     <dl class="credits">
-      <dt class="reveal" style="--d:.05s">主持人：</dt><dd class="reveal" style="--d:.05s">許韻芝</dd>
-      <dt class="reveal" style="--d:.12s">鋼琴伴奏|音箱鼓：</dt><dd class="reveal" style="--d:.12s">楊永成</dd>
-      <dt class="reveal" style="--d:.19s">古箏伴奏：</dt><dd class="reveal" style="--d:.19s">謝蕙如</dd>
-      <dt class="reveal" style="--d:.26s">工作人員：</dt><dd class="reveal" style="--d:.26s">李子帆、胡郁晨</dd>
-      <dt class="reveal" style="--d:.33s">指導老師：</dt><dd class="reveal" style="--d:.33s">時懋菁</dd>
-      <dt class="reveal" style="--d:.40s">平面設計：</dt><dd class="reveal" style="--d:.40s">陳姿羽</dd>
-      <dt class="reveal" style="--d:.47s">其他感謝：</dt><dd class="reveal" style="--d:.47s">咖啡廳工作人員</dd>
+      <dt class="reveal" style="--d:0.05s">主持人：</dt><dd class="reveal" style="--d:0.05s">許韻芝</dd>
+      <dt class="reveal" style="--d:0.12s">鋼琴伴奏|音箱鼓：</dt><dd class="reveal" style="--d:0.12s">楊永成</dd>
+      <dt class="reveal" style="--d:0.19s">古箏伴奏：</dt><dd class="reveal" style="--d:0.19s">謝蕙如</dd>
+      <dt class="reveal" style="--d:0.26s">工作人員：</dt><dd class="reveal" style="--d:0.26s">李子帆、胡郁晨</dd>
+      <dt class="reveal" style="--d:0.33s">指導老師：</dt><dd class="reveal" style="--d:0.33s">時懋菁</dd>
+      <dt class="reveal" style="--d:0.40s">平面設計：</dt><dd class="reveal" style="--d:0.40s">陳姿羽</dd>
+      <dt class="reveal" style="--d:0.47s">其他感謝：</dt><dd class="reveal" style="--d:0.47s">咖啡廳工作人員</dd>
       <dd class="all reveal" style="--d:.54s">所有觀眾</dd>
     </dl>
   </section>
